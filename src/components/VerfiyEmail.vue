@@ -36,8 +36,11 @@
 
 <script>
 import axios from "axios";
+const apiKey = process.env.VUE_APP_API_KEY;
+
 export default {
   name: "VerfiyEmail",
+  apiKey,
   data() {
     return {
       email: "",
@@ -63,7 +66,7 @@ export default {
   methods: {
     async onVerfiy() {
       try {
-        const url = `https://api.hunter.io/v2/email-verifier?email=${this.email}&api_key=${process.env.APIKEY}`;
+        const url = `https://api.hunter.io/v2/email-verifier?email=${this.email}&api_key=${apiKey}`;
         const response = await axios.get(url);
         const result = response.data.data.status;
         if (result === "accept_all" || result === "valid") {
